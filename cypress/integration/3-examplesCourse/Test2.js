@@ -21,22 +21,15 @@ describe('First test suite', function() {
         cy.get('@productlocator').find('.product').each(($el, index, $list) => {
             const textVeg = $el.find('h4.product-name').text();
             if (textVeg.includes('Cashews')) {
-                cy.wrap($el).find('button').click(); //wrap sirve para resolver promises. $el es una promesa. Click esta deprecado para promesas
+                $el.find('button').click();
             }
         });
+        cy.get('.cart-icon > img').click();
+        cy.contains('PROCEED TO CHECKOUT').click();
+        cy.contains('Place Order').click();
+        cy.get('.chkAgree').click();
+        cy.contains('Proceed').click();
 
-        //assert if logo text is correct (exactly)
-        cy.get('.brand').should('have.text', 'GREENKART');
-
-        // Manejar promesas a mano para usar metodos no cypress como jquery
-        cy.get('.brand').then(function(logoelement) {
-            cy.log(logoelement.text());
-        });
-
-        //Cosas que fallan por eso de la promesa:
-        // cy.log(cy.get('.brand').text())
-        // cy.log(logo.text())
-        cy.get(':nth-child(1) > .product-action > button');
     });
 
 });
