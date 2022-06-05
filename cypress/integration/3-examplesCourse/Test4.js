@@ -20,7 +20,10 @@ describe('First test suite', function() {
 
         cy.get('#opentab').invoke('removeAttr', 'target').click();
 
+        cy.url().should('include', 'rahulshettyacademy');
+
         //navigating using browser controls
+        cy.go('back');
     });
 
 });
